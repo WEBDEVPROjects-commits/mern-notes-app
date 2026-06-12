@@ -1,4 +1,5 @@
-function SignUp() {
+import {Link} from "react-router-dom"
+function Signup() {
   return (
     <>
       <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
@@ -16,7 +17,7 @@ function SignUp() {
               Start organizing your notes today
             </p>
           </div>
-
+        <form action="/CreateUser" method="post">
           <div className="space-y-5">
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-2">
@@ -54,15 +55,16 @@ function SignUp() {
               />
             </div>
 
-            <button className="w-full py-3 bg-indigo-600 text-white font-medium rounded-xl hover:bg-indigo-700 transition">
+            <button className="w-full py-3 bg-indigo-600 text-white font-medium rounded-xl hover:bg-indigo-700 transition" type="submit">
               Sign Up
             </button>
           </div>
+          </form>
 
           <p className="text-center text-sm text-slate-500 mt-6">
             Already have an account?
             <span className="text-indigo-600 font-medium cursor-pointer ml-1">
-              Login
+              <Link to="/Login">Login</Link>
             </span>
           </p>
         </div>

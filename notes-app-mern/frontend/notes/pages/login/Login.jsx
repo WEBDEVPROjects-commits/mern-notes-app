@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 function Login() {
   return (
     <>
@@ -12,7 +13,7 @@ function Login() {
 
             <p className="text-slate-500 mt-2">Sign in to access your notes</p>
           </div>
-
+        <form action="/VerifyUser" method="post">
           <div className="space-y-5">
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-2">
@@ -38,15 +39,19 @@ function Login() {
               />
             </div>
 
-            <button className="w-full py-3 bg-indigo-600 text-white font-medium rounded-xl hover:bg-indigo-700 transition">
+            <button
+              className="w-full py-3 bg-indigo-600 text-white font-medium rounded-xl hover:bg-indigo-700 transition"
+              type="submit"
+            >
               Login
             </button>
           </div>
+          </form>
 
           <p className="text-center text-sm text-slate-500 mt-6">
             Don't have an account?
             <span className="text-indigo-600 font-medium cursor-pointer ml-1">
-              Sign Up
+              <Link to="/Signup">Sign Up</Link>
             </span>
           </p>
         </div>
