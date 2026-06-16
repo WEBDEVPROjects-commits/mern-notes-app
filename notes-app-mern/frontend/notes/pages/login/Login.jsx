@@ -24,6 +24,7 @@ function Login() {
                 type="email"
                 placeholder="Enter your email"
                 className="w-full px-4 py-3 border border-slate-300 rounded-xl outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 transition"
+                name="Email"
               />
             </div>
 
@@ -36,6 +37,7 @@ function Login() {
                 type="password"
                 placeholder="Enter your password"
                 className="w-full px-4 py-3 border border-slate-300 rounded-xl outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 transition"
+                name="Password"
               />
             </div>
 

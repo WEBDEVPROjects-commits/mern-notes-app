@@ -7,9 +7,10 @@ import Signup from '../pages/signup/Signup';
 import Login from "../pages/login/Login"
 function App() {
   const [CreateNoteOpen,setCreateNoteOpen]=useState(false);
+  const [Notes,setNotes]=useState();
   return (
     <>  
-    <homeContext.Provider value={{CreateNoteOpen,setCreateNoteOpen}}>
+    <homeContext.Provider value={{CreateNoteOpen,setCreateNoteOpen,Notes,setNotes}}>
         <div className='h-screen'>
           <Routes>
             <Route path="/" element={<Dashboard/>}></Route>
