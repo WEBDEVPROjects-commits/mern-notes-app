@@ -1,13 +1,12 @@
+const {AddNote,UpdateNote,DeleteNote,GetNote,GetNotes}=require("../Controllers/NoteController.js")
 const express=require('express');
+const router=express.Router();
 
-const router=express.router();
 
-
-router.post("/addNote",addNote)
+router.post("/AddNote",AddNote)
 router.post("/DeleteNote/:id",DeleteNote)
 router.post("/UpdateNote/:id",UpdateNote)
-router.get("/getNotes",getNotes)
-router.get("/getNotes/:id",getNote)
+router.get("/getNotes",GetNotes)
+router.get("/getNotes/:id",GetNote)
   
-
-export default router
+module.exports=router

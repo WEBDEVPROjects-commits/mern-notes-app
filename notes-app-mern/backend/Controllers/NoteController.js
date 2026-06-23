@@ -1,15 +1,15 @@
-import noteModel from "../models/noteModel";
-
-async function addNote(req,res){
+const noteModel=require("../models/noteModel")
+async function AddNote(req,res){
     const {title,description}=req.body
     let CreatedNote=await noteModel.create({
         title:title,
-        description:description ,
+        description:description,
     })
     res.json({
         success:true,
         CreatedNote:CreatedNote
     })
+    
 
 }
 async function UpdateNote(req,res){
@@ -26,6 +26,8 @@ async function GetNote(req,res){
 
 
 }
+
+module.exports= {AddNote,UpdateNote,DeleteNote,GetNotes,GetNote}
 // addNote
 // UpdateNote
 // DeleteNote
