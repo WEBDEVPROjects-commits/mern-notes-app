@@ -5,9 +5,11 @@ import Dashboard from '../pages/Dashboard/Dashboard';
 import { homeContext } from './components/Context/Context';
 import Signup from '../pages/signup/Signup';
 import Login from "../pages/login/Login"
+import { useEffect } from 'react';
 function App() {
   const [CreateNoteOpen,setCreateNoteOpen]=useState(false);
-  const [Notes,setNotes]=useState();
+  const [Notes,setNotes]=useState([]);
+
   return (
     <>  
     <homeContext.Provider value={{CreateNoteOpen,setCreateNoteOpen,Notes,setNotes}}>

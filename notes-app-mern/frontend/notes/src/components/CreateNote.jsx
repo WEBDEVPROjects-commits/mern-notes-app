@@ -1,7 +1,32 @@
 import { homeContext } from "./Context/Context";
 import { useContext } from "react";
+import { useState } from "react";
 function CreateNote() {
-  const { CreateNoteOpen, setCreateNoteOpen } = useContext(homeContext);
+  const [title,setTitle]=useState("");
+  const [description,setDescription]=useState("")
+  const { CreateNoteOpen, setCreateNoteOpen, Notes, setNotes } =
+    useContext(homeContext);
+  const addNote = async (e) => {
+    e.preventDefault();
+    const resp = await fetch("http://localhost:3000/api/notes/AddNote",{
+            method:"POST",
+            headers:{
+              "Content-Type": "application/json",
+            },
+            body:JSON.stringify({
+              title:title,
+              description:description
+            })
+    });
+    if(resp.success===true){
+      setNotes((prev) => {
+        return [...prev,resp.CreatedNote]
+      })
+
+    }
+    console.log(resp);
+    setCreateNoteOpen(false);
+  };
   return (
     <>
       {/* Create Note Modal Overlay */}
@@ -38,7 +63,10 @@ function CreateNote() {
           </div>
 
           {/* Form Body */}
-          <form action="/CreateNote" method="post">
+          <form
+            onSubmit={addNote}
+            method="post"
+          >
             <div className="p-6 space-y-5">
               {/* Title */}
               <div>
@@ -50,6 +78,9 @@ function CreateNote() {
                   type="text"
                   placeholder="Enter note title..."
                   className="w-full px-4 py-3 border border-slate-300 rounded-xl outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 transition"
+                  name="title"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
                 />
               </div>
 
@@ -63,6 +94,9 @@ function CreateNote() {
                   rows="6"
                   placeholder="Write your note here..."
                   className="w-full px-4 py-3 border border-slate-300 rounded-xl resize-none outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 transition"
+                  name="description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                 />
               </div>
             </div>
@@ -74,15 +108,14 @@ function CreateNote() {
                 onClick={(e) => {
                   setCreateNoteOpen(false);
                 }}
+                type="button"
               >
                 Cancel
               </button>
 
               <button
+                type="submit"
                 className="px-6 py-2.5 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition shadow-sm"
-                onClick={(e) => {
-                  setCreateNoteOpen(false);
-                }}
               >
                 Save Note
               </button>
