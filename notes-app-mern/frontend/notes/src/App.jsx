@@ -10,6 +10,23 @@ function App() {
   const [CreateNoteOpen,setCreateNoteOpen]=useState(false);
   const [Notes,setNotes]=useState([]);
 
+  const getNotes=async () => {
+    const resp=await fetch("http://localhost:3000/api/notes/GetNotes")
+    const data=await resp.json()
+
+    if(data.success==true){
+      setNotes(data.requiredNotes)
+    }
+  }
+  
+  useEffect(() => {
+    try{
+      getNotes()
+    }
+    catch(err){
+
+    }
+  },[])
   return (
     <>  
     <homeContext.Provider value={{CreateNoteOpen,setCreateNoteOpen,Notes,setNotes}}>

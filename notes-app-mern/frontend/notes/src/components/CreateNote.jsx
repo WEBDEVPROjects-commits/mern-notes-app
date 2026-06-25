@@ -2,30 +2,36 @@ import { homeContext } from "./Context/Context";
 import { useContext } from "react";
 import { useState } from "react";
 function CreateNote() {
-  const [title,setTitle]=useState("");
-  const [description,setDescription]=useState("")
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const { CreateNoteOpen, setCreateNoteOpen, Notes, setNotes } =
     useContext(homeContext);
   const addNote = async (e) => {
     e.preventDefault();
-    const resp = await fetch("http://localhost:3000/api/notes/AddNote",{
-            method:"POST",
-            headers:{
-              "Content-Type": "application/json",
-            },
-            body:JSON.stringify({
-              title:title,
-              description:description
-            })
-    });
-    if(resp.success===true){
-      setNotes((prev) => {
-        return [...prev,resp.CreatedNote]
-      })
 
+    try {
+      const resp = await fetch("http://localhost:3000/api/notes/AddNote", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: title,
+          description: description,
+        }),
+      });
+      console.log(resp);
+      const data = await resp.json();
+      console.log(data);
+      if (data.success === true) {
+        setNotes((prev) => {
+          return [...prev, data.CreatedNote];
+        });
+      }
+      setCreateNoteOpen(false);
+    } catch (err) {
+      console.log(err);
     }
-    console.log(resp);
-    setCreateNoteOpen(false);
   };
   return (
     <>
@@ -63,10 +69,7 @@ function CreateNote() {
           </div>
 
           {/* Form Body */}
-          <form
-            onSubmit={addNote}
-            method="post"
-          >
+          <form onSubmit={addNote}>
             <div className="p-6 space-y-5">
               {/* Title */}
               <div>
